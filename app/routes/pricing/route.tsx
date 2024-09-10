@@ -1,4 +1,4 @@
-export default function Pricing() {
+export default function PricingPage() {
   return (
     <main>
       <h1 className="text-4xl">This is the pricing page.</h1>

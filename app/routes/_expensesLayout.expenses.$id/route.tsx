@@ -1,6 +1,6 @@
 import { useParams } from "@remix-run/react";
 
-export default function ExpenseDetail() {
+export default function ExpenseDetailPage() {
   const { id } = useParams();
 
   return (
