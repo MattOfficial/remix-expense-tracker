@@ -1,11 +1,16 @@
 import { Outlet } from "@remix-run/react";
+import ExpensesList from "~/components/expenses/ExpensesList";
 import expensesStyles from "~/styles/expenses.css";
+import { DUMMY_EXPENSE } from "./expenses.analysis/route";
 
 export default function ExpenseLayout() {
   return (
-    <main>
+    <>
       <Outlet />
-    </main>
+      <main>
+        <ExpensesList expenses={DUMMY_EXPENSE} />
+      </main>
+    </>
   );
 }
 

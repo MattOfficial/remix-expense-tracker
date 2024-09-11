@@ -1,11 +1,10 @@
 import { useParams } from "@remix-run/react";
+import ExpenseForm from "~/components/expenses/ExpenseForm";
 
 export default function ExpenseDetailPage() {
   const { id } = useParams();
 
-  return (
-    <main>
-      <h1 className="text-4xl">Expense detail page for id: {id}</h1>
-    </main>
-  );
+  console.log("id - ", id);
+
+  return <ExpenseForm />;
 }

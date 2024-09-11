@@ -1,16 +1,12 @@
-import { useMemo } from 'react';
+import { useMemo } from "react";
+import { calculateSummaryStatistics } from "./utils";
+import { ExpenseType } from "./types";
 
-function calculateSummaryStatistics(expenses) {
-  const amounts = expenses.map((expense) => +expense.amount);
-  const maxAmount = Math.max(...amounts);
-  const minAmount = Math.min(...amounts);
-  const sum = expenses.reduce((prevVal, curVal) => curVal.amount + prevVal, 0);
-  const mean = sum / expenses.length;
-
-  return { minAmount, maxAmount, sum, mean };
+export interface ExpenseStatisticsProps {
+  expenses: ExpenseType[];
 }
 
-function ExpenseStatistics({ expenses }) {
+function ExpenseStatistics({ expenses }: ExpenseStatisticsProps) {
   const { minAmount, maxAmount, sum, mean } = useMemo(
     () => calculateSummaryStatistics(expenses),
     [expenses]
