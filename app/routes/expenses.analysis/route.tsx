@@ -1,6 +1,6 @@
 import Chart from "./Chart";
 import ExpenseStatistics from "./ExpenseStatistics";
-import { ExpenseType } from "./types";
+import { ExpenseType } from "~/types/expenses";
 
 export const DUMMY_EXPENSE: ExpenseType[] = [
   {

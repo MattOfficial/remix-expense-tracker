@@ -1,5 +1,5 @@
-import { ExpenseType } from "~/routes/_expensesLayout.expenses.analysis/types";
 import ExpenseListItem from "./ExpenseListItem";
+import { ExpenseType } from "~/types/expenses";
 
 export interface ExpensesListProps {
   expenses: ExpenseType[];

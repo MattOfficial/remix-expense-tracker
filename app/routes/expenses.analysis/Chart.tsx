@@ -1,5 +1,5 @@
 import ChartBar from "./ChartBar";
-import { ExpenseType } from "./types";
+import { ExpenseType } from "~/types/expenses";
 
 export interface ChartProps {
   expenses: ExpenseType[];

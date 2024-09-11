@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { calculateSummaryStatistics } from "./utils";
-import { ExpenseType } from "./types";
+import { ExpenseType } from "~/types/expenses";
 
 export interface ExpenseStatisticsProps {
   expenses: ExpenseType[];

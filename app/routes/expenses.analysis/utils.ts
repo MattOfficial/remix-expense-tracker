@@ -1,4 +1,4 @@
-import { ExpenseType } from "./types";
+import { ExpenseType } from "~/types/expenses";
 
 export function calculateSummaryStatistics(expenses: ExpenseType[]) {
   const amounts = expenses.map((expense) => +expense.amount);
