@@ -1,12 +1,14 @@
 import { Outlet } from "@remix-run/react";
+import expensesStyles from "~/styles/expenses.css";
 
 export default function ExpenseLayout() {
   return (
     <main>
-      <h1 className="text-4xl">Common Layout</h1>
-      <div className="bg-orange-500">
-        <Outlet />
-      </div>
+      <Outlet />
     </main>
   );
+}
+
+export function links() {
+  return [{ rel: "stylesheet", href: expensesStyles }];
 }
