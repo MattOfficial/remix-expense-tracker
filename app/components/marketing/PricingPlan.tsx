@@ -1,4 +1,16 @@
-function PricingPlan({ title, price, perks, icon }) {
+export interface PricingPlanProps {
+  title: string;
+  price: string;
+  perks: string[];
+  icon: React.ComponentType;
+}
+
+export default function PricingPlan({
+  title,
+  price,
+  perks,
+  icon,
+}: PricingPlanProps) {
   const Icon = icon;
   return (
     <article>
@@ -15,12 +27,10 @@ function PricingPlan({ title, price, perks, icon }) {
             <li key={perk}>{perk}</li>
           ))}
         </ol>
-        <div className='actions'>
+        <div className="actions">
           <a href="/not-implemented">Learn More</a>
         </div>
       </div>
     </article>
   );
 }
-
-export default PricingPlan;
