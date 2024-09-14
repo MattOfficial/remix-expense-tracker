@@ -1,7 +1,5 @@
-export default function RawExpensePage() {
-  return (
-    <main>
-      <h1 className="text-4xl">Raw expense data</h1>
-    </main>
-  );
+import { DUMMY_EXPENSE } from "./_expensesStyle.expenses.analysis/route";
+
+export function loader() {
+  return DUMMY_EXPENSE;
 }
