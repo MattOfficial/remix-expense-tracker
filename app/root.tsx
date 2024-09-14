@@ -5,7 +5,6 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
-import MainHeader from "~/components/navigation/MainHeader";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -27,7 +26,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        <MainHeader />
         {children}
         <ScrollRestoration />
         <Scripts />

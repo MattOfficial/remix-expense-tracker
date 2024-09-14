@@ -1,7 +1,13 @@
 import { Outlet } from "@remix-run/react";
+import ExpensesHeader from "~/components/navigation/expensesHeader";
 
 export default function ExpenseLayout() {
-  return <Outlet />;
+  return (
+    <>
+      <ExpensesHeader />
+      <Outlet />
+    </>
+  );
 }
 
 export function links() {
