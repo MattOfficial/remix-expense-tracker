@@ -6,12 +6,20 @@ export interface ModalProps {
 }
 
 export default function Modal({ children, onClose }: ModalProps) {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === "Escape") {
+      onClose();
+    }
+  };
+
   return (
     <div
       className="modal-backdrop"
       tabIndex={0}
       onClick={onClose}
+      onKeyDown={handleKeyDown}
       role="button"
+      aria-label="Close Modal"
     >
       <dialog
         className="modal"

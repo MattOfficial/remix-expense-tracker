@@ -6,8 +6,6 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 import MainHeader from "~/components/navigation/MainHeader";
-import sharedStyles from "~/styles/shared.css";
-import "./tailwind.css";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -39,7 +37,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export function links() {
-  return [{ rel: "stylesheet", href: sharedStyles }];
+  return [
+    { rel: "stylesheet", href: "/app/styles/shared.css" },
+    {
+      rel: "stylesheet",
+      href: "/app/tailwind.css",
+    },
+  ];
 }
 
 export default function App() {
