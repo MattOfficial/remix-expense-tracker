@@ -2,5 +2,5 @@ export interface ExpenseType {
   id?: string;
   title: string;
   amount: number;
-  date: string | Date;
+  date: string | number | Date;
 }
