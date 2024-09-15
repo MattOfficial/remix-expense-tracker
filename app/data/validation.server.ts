@@ -1,4 +1,5 @@
 import { ExpenseType } from "~/types/expenses";
+import { FormValidationResponseType } from "~/types/validation";
 
 function isValidTitle(value: string) {
   return value && value.trim().length > 0 && value.trim().length <= 30;
@@ -26,7 +27,7 @@ function isValidDate(value: string | number | Date): boolean {
 }
 
 export function validateExpenseInput(input: ExpenseType) {
-  const validationErrors: { [key: string]: string } = {};
+  const validationErrors: FormValidationResponseType = {};
 
   if (!isValidTitle(input.title)) {
     validationErrors.title =

@@ -6,6 +6,7 @@ import ExpenseForm from "~/components/expenses/ExpenseForm";
 
 import { addExpense } from "~/data/expenses.server";
 import { ExpenseType } from "~/types/expenses";
+import { validateExpenseInput } from "~/data/validation.server";
 
 export default function AddExpensePage() {
   const navigate = useNavigate();
@@ -24,6 +25,11 @@ export async function action({ request }: ActionFunctionArgs) {
     amount: +formData.get("amount")! as number,
     date: new Date(formData.get("date") as string),
   };
+  try {
+    validateExpenseInput(expenseData);
+  } catch (error) {
+    return error;
+  }
   await addExpense(expenseData);
   return redirect("/expenses");
 }
