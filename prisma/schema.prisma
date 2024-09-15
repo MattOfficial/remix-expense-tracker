@@ -12,3 +12,15 @@ datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
 }
+
+// Expense Model
+// id is auto generated - mapped as id in our code and _id in mongoDB
+// title, amount, date are added by the user
+// dateAdded is auto generated - timestamp of when user added the data
+model Expense {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  title     String
+  amount    Float
+  date      DateTime
+  dateAdded DateTime @default(now())
+}

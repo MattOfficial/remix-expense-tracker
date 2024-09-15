@@ -10,7 +10,7 @@ function ExpensesList({ expenses }: ExpensesListProps) {
     <ol id="expenses-list">
       {expenses.map((expense) => (
         <li key={expense.id}>
-          <ExpenseListItem id={expense.id} expense={expense} />
+          <ExpenseListItem id={expense.id!} expense={expense} />
         </li>
       ))}
     </ol>
