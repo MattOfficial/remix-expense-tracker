@@ -83,3 +83,19 @@ export async function updateExpense(
     console.error("Error updating expense:", error);
   }
 }
+
+/**
+ * Deletes an existing expense record in the database.
+ *
+ * @param {string} id - The unique identifier of the expense record to update.
+ *
+ * @returns {Promise<boolean>} - A Promise that resolves when the expense record is deleted with true if it was successfully deleted or false if there was an error.
+ */
+export async function deleteExpense(id: string) {
+  try {
+    return await prisma.expense.delete({ where: { id } });
+  } catch (error) {
+    // TODO: Add proper error handling later
+    console.error("Error deleting expense:", error);
+  }
+}
