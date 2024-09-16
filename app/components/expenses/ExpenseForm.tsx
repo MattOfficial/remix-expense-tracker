@@ -25,7 +25,7 @@ export default function ExpenseForm() {
   };
 
   const navigation = useNavigation();
-  const isSubmitting = navigation.state === "submitting";
+  const isSubmitting = navigation.state !== "idle";
 
   return (
     <Form method="post" className="form" id="expense-form">
