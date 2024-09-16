@@ -1,4 +1,4 @@
-import { Link, useActionData } from "@remix-run/react";
+import { Form, Link, useActionData, useNavigation } from "@remix-run/react";
 import { FormValidationResponseType } from "~/types/validation";
 
 export default function ExpenseForm() {
@@ -7,8 +7,11 @@ export default function ExpenseForm() {
   const validationErrors: FormValidationResponseType | undefined =
     useActionData();
 
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === "submitting";
+
   return (
-    <form method="post" className="form" id="expense-form">
+    <Form method="post" className="form" id="expense-form">
       <p>
         <label htmlFor="title">Expense Title</label>
         <input type="text" id="title" name="title" required maxLength={30} />
@@ -39,9 +42,11 @@ export default function ExpenseForm() {
         </ul>
       )}
       <div className="form-actions">
-        <button>Save Expense</button>
+        <button disabled={isSubmitting}>
+          {isSubmitting ? `Saving...` : `Save Expense`}
+        </button>
         <Link to="/expenses">Cancel</Link>
       </div>
-    </form>
+    </Form>
   );
 }
