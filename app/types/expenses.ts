@@ -3,4 +3,5 @@ export interface ExpenseType {
   title: string;
   amount: number;
   date: string | number | Date;
+  dateAdded?: string | number | Date;
 }
