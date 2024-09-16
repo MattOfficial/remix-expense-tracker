@@ -28,3 +28,12 @@ export async function getExpenses() {
     throw error;
   }
 }
+
+export async function getExpense(id: string) {
+  try {
+    return await prisma.expense.findUnique({ where: { id } });
+  } catch (error) {
+    // TODO: Add proper error handling later
+    console.error("Error getting expense:", error);
+  }
+}

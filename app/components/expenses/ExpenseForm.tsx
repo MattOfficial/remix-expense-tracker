@@ -1,4 +1,11 @@
-import { Form, Link, useActionData, useNavigation } from "@remix-run/react";
+import {
+  Form,
+  Link,
+  useActionData,
+  useLoaderData,
+  useNavigation,
+} from "@remix-run/react";
+import { ExpenseType } from "~/types/expenses";
 import { FormValidationResponseType } from "~/types/validation";
 
 export default function ExpenseForm() {
@@ -7,6 +14,16 @@ export default function ExpenseForm() {
   const validationErrors: FormValidationResponseType | undefined =
     useActionData();
 
+  const expense: ExpenseType | undefined = useLoaderData();
+
+  const defaultValues = {
+    title: expense?.title || "",
+    amount: expense?.amount || "",
+    date: expense?.date
+      ? new Date(expense.date).toISOString().slice(0, 10)
+      : "",
+  };
+
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
 
@@ -14,7 +31,14 @@ export default function ExpenseForm() {
     <Form method="post" className="form" id="expense-form">
       <p>
         <label htmlFor="title">Expense Title</label>
-        <input type="text" id="title" name="title" required maxLength={30} />
+        <input
+          type="text"
+          id="title"
+          name="title"
+          required
+          maxLength={30}
+          defaultValue={defaultValues.title}
+        />
       </p>
 
       <div className="form-row">
@@ -27,11 +51,19 @@ export default function ExpenseForm() {
             min="0"
             step="0.01"
             required
+            defaultValue={defaultValues.amount}
           />
         </p>
         <p>
           <label htmlFor="date">Date</label>
-          <input type="date" id="date" name="date" max={today} required />
+          <input
+            type="date"
+            id="date"
+            name="date"
+            max={today}
+            required
+            defaultValue={defaultValues.date}
+          />
         </p>
       </div>
       {validationErrors && (
