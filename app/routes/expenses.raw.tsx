@@ -1,5 +1,3 @@
-import { DUMMY_EXPENSE } from "./_expensesStyle.expenses.analysis/route";
+import { loader as expenseLoader } from "~/routes/_expensesStyle";
 
-export function loader() {
-  return DUMMY_EXPENSE;
-}
+export const loader = expenseLoader;
