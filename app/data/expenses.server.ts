@@ -13,9 +13,7 @@ export async function getExpenses(): Promise<ExpenseType[]> {
       orderBy: { date: "desc" },
     });
   } catch (error) {
-    // TODO: Add proper error handling later
-    console.error("Error getting expenses:", error);
-    throw error;
+    throw new Error("Error retrieving expenses");
   }
 }
 
@@ -30,8 +28,7 @@ export async function getExpense(id: string) {
   try {
     return await prisma.expense.findUnique({ where: { id } });
   } catch (error) {
-    // TODO: Add proper error handling later
-    console.error("Error getting expense:", error);
+    throw new Error("Error retrieving expense");
   }
 }
 
@@ -51,9 +48,7 @@ export async function addExpense(expenseData: ExpenseType) {
       },
     });
   } catch (error) {
-    // TODO: Add proper error handling later
-    console.error("Error adding expense:", error);
-    throw error;
+    throw new Error("Error adding expense");
   }
 }
 
@@ -79,8 +74,7 @@ export async function updateExpense(
       },
     });
   } catch (error) {
-    // TODO: Add proper error handling later
-    console.error("Error updating expense:", error);
+    throw new Error("Error updating expense");
   }
 }
 
@@ -95,7 +89,6 @@ export async function deleteExpense(id: string) {
   try {
     return await prisma.expense.delete({ where: { id } });
   } catch (error) {
-    // TODO: Add proper error handling later
-    console.error("Error deleting expense:", error);
+    throw new Error("Error deleting expense");
   }
 }

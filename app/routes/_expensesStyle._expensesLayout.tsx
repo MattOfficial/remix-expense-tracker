@@ -7,6 +7,8 @@ import { ExpenseType } from "~/types/expenses";
 export default function ExpenseLayout() {
   const expenses: ExpenseType[] = useLoaderData();
 
+  const hasExpenses = expenses && expenses.length > 0;
+
   return (
     <>
       <Outlet />
@@ -21,7 +23,16 @@ export default function ExpenseLayout() {
             <span>Load Raw Data</span>
           </a>
         </section>
-        <ExpensesList expenses={expenses} />
+        {hasExpenses ? (
+          <ExpensesList expenses={expenses} />
+        ) : (
+          <section id="no-expenses">
+            <h1>No expenses found</h1>
+            <p>
+              Start by <Link to="/expenses/add">adding some</Link> expenses!
+            </p>
+          </section>
+        )}
       </main>
     </>
   );
