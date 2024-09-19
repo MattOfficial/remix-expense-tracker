@@ -1,5 +1,6 @@
 import { Outlet } from "@remix-run/react";
 import ExpensesHeader from "~/components/navigation/expensesHeader";
+import { getExpenses } from "~/data/expenses.server";
 
 export default function ExpenseLayout() {
   return (
@@ -8,6 +9,10 @@ export default function ExpenseLayout() {
       <Outlet />
     </>
   );
+}
+
+export function loader() {
+  return getExpenses();
 }
 
 export function links() {

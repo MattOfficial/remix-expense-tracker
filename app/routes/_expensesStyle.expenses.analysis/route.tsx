@@ -1,27 +1,40 @@
+import { Link, useLoaderData, useRouteError } from "@remix-run/react";
 import Chart from "./Chart";
 import ExpenseStatistics from "./ExpenseStatistics";
+import ErrorComponent from "~/components/util/Error";
+import { loader as expenseLoader } from "~/routes/_expensesStyle";
 import { ExpenseType } from "~/types/expenses";
 
-export const DUMMY_EXPENSE: ExpenseType[] = [
-  {
-    id: "e1",
-    title: "Toilet Paper",
-    amount: 94.12,
-    date: new Date(2020, 7, 14).toISOString(),
-  },
-  {
-    id: "e2",
-    title: "Burger",
-    amount: 13.12,
-    date: new Date(2020, 7, 10).toISOString(),
-  },
-];
+export const loader = expenseLoader;
 
 export default function AnalysisPage() {
+  const expenses: ExpenseType[] = useLoaderData();
+
+  if (!expenses || expenses.length === 0) {
+    throw new Error("No expenses found. Please add some to start analysis.");
+  }
+
   return (
     <main>
-      <Chart expenses={DUMMY_EXPENSE} />
-      <ExpenseStatistics expenses={DUMMY_EXPENSE} />
+      <Chart expenses={expenses} />
+      <ExpenseStatistics expenses={expenses} />
+    </main>
+  );
+}
+
+export function ErrorBoundary() {
+  const error = useRouteError() as Error;
+
+  console.log(error.stack);
+
+  return (
+    <main>
+      <ErrorComponent title="An error occured">
+        <p>{error?.message || "Something went wrong. Please try again."}</p>
+        <p>
+          Back to <Link to="/">safety</Link>.
+        </p>
+      </ErrorComponent>
     </main>
   );
 }

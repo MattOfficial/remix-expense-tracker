@@ -1,8 +1,10 @@
 import { Link, Outlet, useLoaderData } from "@remix-run/react";
 import { FaDownload, FaPlus } from "react-icons/fa";
 import ExpensesList from "~/components/expenses/ExpensesList";
-import { getExpenses } from "~/data/expenses.server";
+import { loader as expenseLoader } from "~/routes/_expensesStyle";
 import { ExpenseType } from "~/types/expenses";
+
+export const loader = expenseLoader;
 
 export default function ExpenseLayout() {
   const expenses: ExpenseType[] = useLoaderData();
@@ -36,8 +38,4 @@ export default function ExpenseLayout() {
       </main>
     </>
   );
-}
-
-export function loader() {
-  return getExpenses();
 }
