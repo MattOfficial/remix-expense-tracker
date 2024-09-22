@@ -26,3 +26,6 @@ This is a expense tracker project created using [`remix`](https://remix.run/docs
    2. Add the following env string to your `.env` file:
       `DATABASE_URL="mongodb+srv://<db_username>:<db_password>@expense-tracker.mnyrc.mongodb.net/?retryWrites=true&w=majority&appName=expense-tracker"`
       You can get the correct string from `mongoDB` or your DB provider.
+5. For authentication, add the following in your `.env` file:
+   `SESSION_SECET='session_secret'`
+   This is just a dummy string used for dev server. For PROD server come up with something more robust.

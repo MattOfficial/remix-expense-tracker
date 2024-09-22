@@ -7,12 +7,14 @@ export interface ErrorProps {
 
 function Error({ title, children }: ErrorProps) {
   return (
-    <div className="error">
-      <div className="icon">
-        <FaExclamationCircle />
+    <div className="flex flex-col items-center justify-center min-h-screen">
+      <div className="text-center">
+        <div className="flex justify-center mb-4">
+          <FaExclamationCircle className="text-4xl" />
+        </div>
+        <h2 className="text-2xl font-bold mb-2">{title}</h2>
+        <div className="text-center">{children}</div>
       </div>
-      <h2>{title}</h2>
-      {children}
     </div>
   );
 }
