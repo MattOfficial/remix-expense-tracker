@@ -13,14 +13,32 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// Expense Model
-// id is auto generated - mapped as id in our code and _id in mongoDB
-// title, amount, date are added by the user
-// dateAdded is auto generated - timestamp of when user added the data
+// User model represents a user in the system
+model User {
+  // Unique identifier for the user, automatically generated as ObjectId
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
+  // User's email address, must be unique to each user
+  email    String    @unique
+  // User's password (should be hashed before storing)
+  password String
+  // Relation to Expense model, one user can have many expenses
+  expenses Expense[]
+}
+
+// Expense model represents an individual expense entry
 model Expense {
+  // Unique identifier for the expense, automatically generated as ObjectId
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  // Title or description of the expense
   title     String
+  // Monetary amount of the expense
   amount    Float
+  // Date when the expense occurred
   date      DateTime
+  // Timestamp for when the expense was added to the system
   dateAdded DateTime @default(now())
+  // Relation to User model, optional (can be null)
+  User      User     @relation(fields: [userId], references: [id])
+  // Foreign key to link expense to a user, optional (can be null)
+  userId    String   @db.ObjectId
 }
