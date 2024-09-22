@@ -1,5 +1,7 @@
 import { ActionFunctionArgs } from "@remix-run/node";
 import AuthForm from "./AuthForm";
+import { validateCredentials } from "~/data/validation.server";
+import { AuthCredentialType } from "~/types/authentication";
 
 export default function AuthenticationPage() {
   return <AuthForm />;
@@ -12,7 +14,11 @@ export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
   const credentials = Object.fromEntries(formData);
 
-  // TODO: Add validation for credentials
+  try {
+    validateCredentials(credentials as unknown as AuthCredentialType);
+  } catch (error) {
+    return error;
+  }
 
   if (mode === "login") {
     // TODO: add login logic...
