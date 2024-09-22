@@ -1,7 +1,8 @@
-import { ActionFunctionArgs } from "@remix-run/node";
+import { ActionFunctionArgs, redirect } from "@remix-run/node";
 import AuthForm from "./AuthForm";
 import { validateCredentials } from "~/data/validation.server";
 import { AuthCredentialType } from "~/types/authentication";
+import { signup } from "~/data/auth.server";
 
 export default function AuthenticationPage() {
   return <AuthForm />;
@@ -23,7 +24,12 @@ export async function action({ request }: ActionFunctionArgs) {
   if (mode === "login") {
     // TODO: add login logic...
   } else {
-    // TODO: add signup logic...
+    try {
+      await signup(credentials as unknown as AuthCredentialType);
+      return redirect("/expenses");
+    } catch (error) {
+      return { credentials: (error as Error)?.message };
+    }
   }
 
   console.log(credentials);
