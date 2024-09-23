@@ -7,7 +7,6 @@ const SESSION_SECRET = process.env.SESSION_SECRET;
 
 const sessionStorage = createCookieSessionStorage({
   cookie: {
-    name: "__Secure-next-auth-session",
     maxAge: 60 * 60 * 24 * 30, // 30 days
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
@@ -69,4 +68,27 @@ export async function login({ email, password }: AuthCredentialType) {
   }
 
   return createUserSession(existingUser.id, "/expenses");
+}
+
+export async function getUserFromSession(request: Request) {
+  const session = await sessionStorage.getSession(
+    request.headers.get("Cookie")
+  );
+  const userId = session.get("userId");
+  if (!userId) {
+    return null;
+  }
+
+  return userId;
+}
+
+export async function logout(request: Request) {
+  const session = await sessionStorage.getSession(
+    request.headers.get("Cookie")
+  );
+  return redirect("/", {
+    headers: {
+      "Set-Cookie": await sessionStorage.destroySession(session),
+    },
+  });
 }
