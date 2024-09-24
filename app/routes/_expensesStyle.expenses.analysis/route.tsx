@@ -25,8 +25,6 @@ export default function AnalysisPage() {
 export function ErrorBoundary() {
   const error = useRouteError() as Error;
 
-  console.log(error.stack);
-
   return (
     <main>
       <ErrorComponent title="An error occured">

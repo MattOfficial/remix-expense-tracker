@@ -22,9 +22,9 @@ export default function ExpenseDetailPage() {
 }
 
 export async function loader({ request, params }: LoaderFunctionArgs) {
-  await requireUserSession(request);
+  const userId = await requireUserSession(request);
   const expenseId: string = params.id!;
-  const expense = await getExpense(expenseId);
+  const expense = await getExpense(expenseId, userId);
   return expense;
 }
 

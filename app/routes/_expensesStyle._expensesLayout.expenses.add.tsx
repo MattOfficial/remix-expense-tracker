@@ -7,6 +7,7 @@ import ExpenseForm from "~/components/expenses/ExpenseForm";
 import { addExpense } from "~/data/expenses.server";
 import { ExpenseType } from "~/types/expenses";
 import { validateExpenseInput } from "~/data/validation.server";
+import { requireUserSession } from "~/data/auth.server";
 
 export default function AddExpensePage() {
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ export default function AddExpensePage() {
 }
 
 export async function action({ request }: ActionFunctionArgs) {
+  const userId = await requireUserSession(request);
   const formData = await request.formData();
   const expenseData: ExpenseType = {
     title: formData.get("title") as string,
@@ -30,6 +32,6 @@ export async function action({ request }: ActionFunctionArgs) {
   } catch (error) {
     return error;
   }
-  await addExpense(expenseData);
+  await addExpense(expenseData, userId);
   return redirect("/expenses");
 }

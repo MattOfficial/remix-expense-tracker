@@ -14,8 +14,8 @@ export default function ExpenseLayout() {
 }
 
 export async function loader({ request }: LoaderFunctionArgs) {
-  await requireUserSession(request);
-  return getExpenses();
+  const userId = await requireUserSession(request);
+  return getExpenses(userId);
 }
 
 export function links() {

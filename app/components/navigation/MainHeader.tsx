@@ -4,8 +4,6 @@ import Logo from "../util/Logo";
 export default function MainHeader() {
   const userId = useLoaderData();
 
-  console.log("userId - ", userId);
-
   return (
     <header id="main-header">
       <Logo />
